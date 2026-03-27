@@ -94,10 +94,18 @@ const PassportPage = () => {
           <h3 style={{ marginBottom: "15px" }}>AI Summary</h3>
 
           {/* Tone Toggle */}
-          <div style={{ marginBottom: "15px" }}>
+          <div
+            style={{
+              marginBottom: "15px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
+            }}
+          >
             <span>Formal</span>
 
-            <label style={{ margin: "0 10px", position: "relative" }}>
+            <label style={{ position: "relative", display: "inline-block" }}>
               <input
                 type="checkbox"
                 checked={tone === "friendly"}
@@ -109,11 +117,11 @@ const PassportPage = () => {
 
               <span
                 style={{
-                  display: "inline-block",
-                  width: "50px",
-                  height: "25px",
+                  width: "40px", 
+                  height: "20px", 
                   background: tone === "friendly" ? "#22c55e" : "#ccc",
-                  borderRadius: "25px",
+                  borderRadius: "20px",
+                  display: "inline-block",
                   position: "relative",
                   cursor: "pointer",
                 }}
@@ -121,13 +129,14 @@ const PassportPage = () => {
                 <span
                   style={{
                     position: "absolute",
-                    width: "20px",
-                    height: "20px",
+                    width: "16px",
+                    height: "16px",
                     background: "#fff",
                     borderRadius: "50%",
-                    top: "2.5px",
-                    left: tone === "friendly" ? "25px" : "3px",
-                    transition: "0.3s",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    left: tone === "friendly" ? "20px" : "2px",
+                    transition: "0.2s ease",
                   }}
                 />
               </span>

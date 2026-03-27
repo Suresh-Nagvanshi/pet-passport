@@ -86,7 +86,7 @@ const HealthTimeline = ({ events = [], onUpdate }) => {
   );
 };
 
-/* 🎨 STYLES */
+/*  STYLES */
 
 const card = {
   marginTop: "20px",
@@ -126,7 +126,7 @@ const dot = {
   marginTop: "6px",
   boxShadow: "0 0 0 8px rgba(250,204,21,0.2)",
   position: "relative",
-  zIndex: 2, // 👈 bring dot on top
+  zIndex: 2,
 };
 
 const content = {

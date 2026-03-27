@@ -69,13 +69,13 @@ const petSchema = new mongoose.Schema(
       type: String,
     },
 
-    // ✅ Vaccinations
+    //  Vaccinations
     vaccinations: [vaccinationSchema],
 
-    // ✅ Health Events
+    //  Health Events
     healthEvents: [healthEventSchema],
 
-    // ✅ Travel Readiness
+    //  Travel Readiness
     travelReadiness: {
       microchipConfirmed: {
         type: Boolean,
@@ -89,7 +89,7 @@ const petSchema = new mongoose.Schema(
       },
     },
 
-    // ✅ Emergency Contacts
+    //  Emergency Contacts
     emergencyContacts: {
       ownerPhone: String,
       emergencyVetName: String,
