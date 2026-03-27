@@ -22,7 +22,16 @@ const PetList = () => {
         minHeight: "100vh",
       }}
     >
-      <h2 style={{ marginBottom: "20px", color: "#1e293b" }}>
+      <h2
+        style={{
+          marginBottom: "20px",
+          color: "#1e293b",
+          textAlign: "center",
+          fontFamily: "cursive",
+          fontSize: "2.5rem",
+          fontWeight: "bold",
+        }}
+      >
         Your Pets
       </h2>
 
@@ -42,8 +51,19 @@ const PetList = () => {
               background: "#fff",
               padding: "15px",
               borderRadius: "16px",
-              boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
-              transition: "0.3s",
+              boxShadow: "0 6px 16px rgba(0,0,0,0.08)",
+              transition: "transform 0.18s ease-out, box-shadow 0.18s ease-out",
+              willChange: "transform",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-5px) scale(1.015)";
+              e.currentTarget.style.boxShadow =
+                "0 12px 24px rgba(0,0,0,0.12)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0) scale(1)";
+              e.currentTarget.style.boxShadow =
+                "0 6px 16px rgba(0,0,0,0.08)";
             }}
           >
             <img
@@ -51,10 +71,18 @@ const PetList = () => {
               alt={pet.name}
               style={{
                 width: "100%",
-                height: "250px", // 🔥 increase height,
+                height: "250px",
                 objectFit: "cover",
                 borderRadius: "12px",
                 marginBottom: "10px",
+                transition: "transform 0.18s ease-out",
+                willChange: "transform",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.04)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
               }}
             />
 

@@ -25,7 +25,7 @@ const PetHeader = ({ pet }) => {
       <div>
         <h1 style={{ margin: 0, color: "#1e293b" }}>{pet.name}</h1>
 
-        <p style={{ margin: "5px 0", color: "#475569", marginTop: "15px" }}>
+        <p style={{ margin: "5px 0", color: "#475569", marginTop: "25px" }}>
           {pet.breed} • {pet.type}
         </p>
 
