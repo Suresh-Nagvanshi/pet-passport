@@ -68,7 +68,10 @@ const PassportPage = () => {
       {/* LEFT */}
       <div style={{ flex: 7 }}>
         <PetHeader pet={pet} />
-        <TravelStatusBadge travelReadiness={pet.travelReadiness} />
+        <TravelStatusBadge
+          travelReadiness={pet.travelReadiness}
+          onUpdate={handleUpdatePet}
+        />
 
         <VaccinationTable
           vaccinations={pet.vaccinations || []}
@@ -117,8 +120,8 @@ const PassportPage = () => {
 
               <span
                 style={{
-                  width: "40px", 
-                  height: "20px", 
+                  width: "40px",
+                  height: "20px",
                   background: tone === "friendly" ? "#22c55e" : "#ccc",
                   borderRadius: "20px",
                   display: "inline-block",
