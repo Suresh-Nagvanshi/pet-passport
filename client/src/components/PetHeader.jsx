@@ -3,45 +3,33 @@ const PetHeader = ({ pet }) => {
     <div
       style={{
         display: "flex",
-        alignItems: "center",
         gap: "20px",
         padding: "25px",
-        borderRadius: "16px",
-        background: "linear-gradient(135deg, #1e293b, #0f172a)",
-        boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
-        color: "white",
+        borderRadius: "20px",
+        background: "linear-gradient(135deg, #fff7ed, #fef3c7)",
+        boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
       }}
     >
-      {/* Pet Image */}
-      <div
+      <img
+        src={pet.photo}
+        alt={pet.name}
         style={{
-          position: "relative",
+          width: "110px",
+          height: "110px",
+          borderRadius: "50%",
+          objectFit: "cover",
+          border: "4px solid #facc15",
         }}
-      >
-        <img
-          src={pet.photo}
-          alt={pet.name}
-          style={{
-            width: "110px",
-            height: "110px",
-            borderRadius: "50%",
-            objectFit: "cover",
-            border: "4px solid #38bdf8",
-          }}
-        />
-      </div>
+      />
 
-      {/* Pet Info */}
       <div>
-        <h1 style={{ margin: 0, fontSize: "28px", fontWeight: "600" }}>
-          {pet.name}
-        </h1>
+        <h1 style={{ margin: 0, color: "#1e293b" }}>{pet.name}</h1>
 
-        <p style={{ margin: "5px 0", opacity: 0.8 }}>
+        <p style={{ margin: "5px 0", color: "#475569", marginTop: "15px" }}>
           {pet.breed} • {pet.type}
         </p>
 
-        <p style={{ margin: 0, fontSize: "14px", opacity: 0.7 }}>
+        <p style={{ fontSize: "14px", color: "#64748b" }}>
           Gender: {pet.gender}
         </p>
       </div>

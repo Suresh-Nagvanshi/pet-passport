@@ -17,18 +17,19 @@ const PetList = () => {
   return (
     <div
       style={{
-        width: "1000px",
-        margin: "0 auto",
-        padding: "20px 40px",
-        color: "white",
+        padding: "30px",
+        background: "linear-gradient(to bottom, #fff7ed, #fefce8)",
+        minHeight: "100vh",
       }}
     >
-      <h2 style={{ marginBottom: "20px" }}>🐾 Your Pets</h2>
+      <h2 style={{ marginBottom: "20px", color: "#1e293b" }}>
+        Your Pets
+      </h2>
 
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)", // ✅ 4 per row
+          gridTemplateColumns: "repeat(4, 1fr)",
           gap: "20px",
         }}
       >
@@ -38,10 +39,10 @@ const PetList = () => {
             onClick={() => navigate(`/passport/${pet._id}`)}
             style={{
               cursor: "pointer",
-              background: "#1e293b",
+              background: "#fff",
               padding: "15px",
               borderRadius: "16px",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.25)",
+              boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
               transition: "0.3s",
             }}
           >
@@ -50,15 +51,18 @@ const PetList = () => {
               alt={pet.name}
               style={{
                 width: "100%",
-                height: "140px",
+                height: "250px", // 🔥 increase height,
                 objectFit: "cover",
                 borderRadius: "12px",
                 marginBottom: "10px",
               }}
             />
 
-            <h3 style={{ margin: "5px 0" }}>{pet.name}</h3>
-            <p style={{ opacity: 0.7 }}>
+            <h3 style={{ margin: "5px 0", color: "#1e293b" }}>
+              {pet.name}
+            </h3>
+
+            <p style={{ color: "#64748b" }}>
               {pet.breed} • {pet.type}
             </p>
           </div>

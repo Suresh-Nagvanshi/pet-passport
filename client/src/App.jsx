@@ -10,7 +10,6 @@ import TravelStatusBadge from "./components/TravelStatusBadge";
 import PetList from "./components/PetList";
 import { QRCodeCanvas } from "qrcode.react";
 
-// ✅ Passport Page
 const PassportPage = () => {
   const { petId } = useParams();
 
@@ -27,10 +26,10 @@ const PassportPage = () => {
     loadPet();
   }, [petId]);
 
+  const BASE_URL = window.location.origin.replace("5173", "5000");
+
   const handleGenerateSummary = async () => {
     setLoading(true);
-
-    const BASE_URL = window.location.origin.replace("5173", "5000");
 
     const res = await fetch(`${BASE_URL}/api/pets/${petId}/passport/summary`, {
       method: "POST",
@@ -39,13 +38,11 @@ const PassportPage = () => {
     });
 
     const data = await res.json();
-    setSummary(data.summary || "Failed to generate summary");
+    setSummary(data.summary || "Failed");
     setLoading(false);
   };
 
   const handleUpdatePet = async (updatedPet) => {
-    const BASE_URL = window.location.origin.replace("5173", "5000");
-
     await fetch(`${BASE_URL}/api/pets/${petId}/passport`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -56,64 +53,51 @@ const PassportPage = () => {
     setPet(data);
   };
 
-  if (!pet) return <h2 style={{ color: "white" }}>Loading...</h2>;
+  if (!pet) return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
 
   return (
     <div
       style={{
         display: "flex",
         gap: "20px",
-        padding: "20px 40px",
-        alignItems: "flex-start",
+        padding: "30px",
+        background: "linear-gradient(to bottom, #fff7ed, #fefce8)",
+        minHeight: "100vh",
       }}
     >
-      {/* LEFT SIDE (70%) */}
+      {/* LEFT */}
       <div style={{ flex: 7 }}>
         <PetHeader pet={pet} />
         <TravelStatusBadge travelReadiness={pet.travelReadiness} />
 
         <VaccinationTable
-          vaccinations={pet.vaccinations}
+          vaccinations={pet.vaccinations || []}
           onUpdate={handleUpdatePet}
         />
 
-        <HealthTimeline events={pet.healthEvents} onUpdate={handleUpdatePet} />
+        <HealthTimeline
+          events={pet.healthEvents || []}
+          onUpdate={handleUpdatePet}
+        />
       </div>
 
-      {/* RIGHT SIDE (30%) */}
-      <div
-        style={{
-          flex: 3,
-          position: "sticky",
-          top: "20px",
-        }}
-      >
+      {/* RIGHT PANEL */}
+      <div style={{ flex: 3, position: "sticky", top: "20px" }}>
         <div
           style={{
-            background: "#1e293b",
+            background: "#fff",
             padding: "20px",
             borderRadius: "16px",
-            boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
-            height: "90vh",
-            display: "flex",
-            flexDirection: "column",
+            boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
           }}
         >
-          <h3 style={{ marginBottom: "15px" }}>🧠 AI Summary</h3>
+          <h3 style={{ marginBottom: "15px" }}>AI Summary</h3>
 
           {/* Tone Toggle */}
-          <div style={{ marginBottom: "15px", color: "white" }}>
+          <div style={{ marginBottom: "15px" }}>
             <span>Formal</span>
 
-            <label
-              style={{
-                display: "inline-block",
-                margin: "0 10px",
-                position: "relative",
-                width: "50px",
-                height: "25px",
-              }}
-            >
+            <label style={{ margin: "0 10px", position: "relative" }}>
               <input
                 type="checkbox"
                 checked={tone === "friendly"}
@@ -125,22 +109,21 @@ const PassportPage = () => {
 
               <span
                 style={{
-                  position: "absolute",
-                  cursor: "pointer",
+                  display: "inline-block",
+                  width: "50px",
+                  height: "25px",
                   background: tone === "friendly" ? "#22c55e" : "#ccc",
                   borderRadius: "25px",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
+                  position: "relative",
+                  cursor: "pointer",
                 }}
               >
                 <span
                   style={{
                     position: "absolute",
-                    height: "20px",
                     width: "20px",
-                    background: "white",
+                    height: "20px",
+                    background: "#fff",
                     borderRadius: "50%",
                     top: "2.5px",
                     left: tone === "friendly" ? "25px" : "3px",
@@ -153,53 +136,30 @@ const PassportPage = () => {
             <span>Friendly</span>
           </div>
 
-          {/* Generate Button */}
+          {/* Button */}
           <button
             onClick={handleGenerateSummary}
-            disabled={loading}
             style={{
               width: "100%",
               padding: "10px",
-              borderRadius: "8px",
-              background: "#38bdf8",
-              color: "#0f172a",
+              background: "#facc15",
               border: "none",
+              borderRadius: "10px",
               fontWeight: "600",
-              marginBottom: "15px",
               cursor: "pointer",
+              marginBottom: "15px",
             }}
           >
             {loading ? "Generating..." : "Generate Summary"}
           </button>
 
-          {/* Summary */}
-          <div style={{ flex: 1, overflow: "hidden" }}>
-            <SummaryBox summary={summary} />
-          </div>
+          <SummaryBox summary={summary} />
 
-          {/* 🔥 QR CODE SECTION */}
-          <div
-            style={{
-              marginTop: "20px",
-              textAlign: "center",
-            }}
-          >
-            <p
-              style={{
-                marginBottom: "10px",
-                fontSize: "13px",
-                opacity: 0.7,
-              }}
-            >
-              Scan to open this passport
-            </p>
-
+          {/* QR */}
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
             <QRCodeCanvas
               value={`${window.location.origin}/passport/${petId}`}
               size={120}
-              bgColor="#ffffff"
-              fgColor="#0f172a"
-              level="H"
             />
           </div>
         </div>
@@ -208,7 +168,6 @@ const PassportPage = () => {
   );
 };
 
-// ✅ Routing
 function App() {
   return (
     <Routes>

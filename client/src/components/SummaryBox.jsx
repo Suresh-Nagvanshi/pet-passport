@@ -10,9 +10,10 @@ const SummaryBox = ({ summary }) => {
           marginTop: "20px",
           padding: "20px",
           borderRadius: "12px",
-          background: "#0f172a",
-          color: "#94a3b8",
+          background: "#ffffff",
+          color: "#64748b",
           textAlign: "center",
+          boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
         }}
       >
         No summary generated yet.
@@ -31,50 +32,35 @@ const SummaryBox = ({ summary }) => {
         marginTop: "20px",
         padding: "20px",
         borderRadius: "16px",
-        background: "#1e293b",
-        color: "white",
-        boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
+        background: "#ffffff",
+        color: "#1e293b",
+        boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
       }}
     >
-      {/* Header */}
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "15px",
+          marginBottom: "10px",
         }}
       >
-        <h3 style={{ margin: 0 }}>🧠 AI Health Summary</h3>
+        <h3>AI Summary</h3>
 
         <button
           onClick={handleCopy}
           style={{
-            padding: "6px 12px",
-            borderRadius: "8px",
+            background: "#facc15",
             border: "none",
+            borderRadius: "8px",
+            padding: "5px 10px",
             cursor: "pointer",
-            background: copied ? "#22c55e" : "#334155",
-            color: "white",
-            fontSize: "12px",
           }}
         >
           {copied ? "Copied!" : "Copy"}
         </button>
       </div>
 
-      {/* Summary Content */}
-      <div
-        style={{
-          lineHeight: "1.6",
-          fontSize: "14px",
-          color: "#e2e8f0",
-          whiteSpace: "pre-line",
-          overflowY: "auto",
-          maxHeight: "300px", // 👈 scroll area
-          paddingRight: "5px",
-        }}
-      >
+      <div style={{ whiteSpace: "pre-line", color: "#475569" }}>
         {summary}
       </div>
     </div>

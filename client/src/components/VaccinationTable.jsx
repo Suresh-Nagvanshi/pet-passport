@@ -13,10 +13,8 @@ const VaccinationTable = ({ vaccinations, onUpdate }) => {
       return;
     }
 
-    const newVaccination = { ...form };
-
     onUpdate({
-      vaccinations: [...vaccinations, newVaccination],
+      vaccinations: [...vaccinations, form],
     });
 
     setForm({
@@ -29,7 +27,6 @@ const VaccinationTable = ({ vaccinations, onUpdate }) => {
   const getStatus = (expiryDate) => {
     const today = new Date();
     const expiry = new Date(expiryDate);
-
     const diffDays = (expiry - today) / (1000 * 60 * 60 * 24);
 
     if (diffDays < 0) return { label: "Expired", color: "#ef4444" };
@@ -42,34 +39,34 @@ const VaccinationTable = ({ vaccinations, onUpdate }) => {
       style={{
         marginTop: "20px",
         padding: "20px",
-        borderRadius: "16px",
-        background: "#1e293b",
-        color: "white",
-        boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
+        borderRadius: "20px",
+        background: "#ffffff",
+        boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
+        color: "#1e293b",
       }}
     >
-      <h3 style={{ marginBottom: "15px" }}>💉 Vaccinations</h3>
+      <h3 style={{ marginBottom: "15px" }}>Vaccinations</h3>
 
       {/* Table */}
       <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
-          <tr style={{ textAlign: "left", color: "#94a3b8" }}>
-            <th style={{ padding: "10px" }}>Name</th>
-            <th style={{ padding: "10px" }}>Date Given</th>
-            <th style={{ padding: "10px" }}>Expiry</th>
-            <th style={{ padding: "10px" }}>Status</th>
+          <tr style={{ color: "#64748b" }}>
+            <th style={{ padding: "10px", textAlign: "center" }}>Name</th>
+            <th style={{ padding: "10px", textAlign: "center" }}>Date Given</th>
+            <th style={{ padding: "10px", textAlign: "center" }}>Expiry</th>
+            <th style={{ padding: "10px", textAlign: "center" }}>Status</th>
           </tr>
         </thead>
 
         <tbody>
-          {vaccinations.map((v, i) => {
+          {(vaccinations || []).map((v, i) => {
             const status = getStatus(v.expiryDate);
 
             return (
               <tr
                 key={i}
                 style={{
-                  borderTop: "1px solid #334155",
+                  borderTop: "1px solid #e2e8f0",
                 }}
               >
                 <td style={{ padding: "10px" }}>{v.name}</td>
@@ -83,9 +80,9 @@ const VaccinationTable = ({ vaccinations, onUpdate }) => {
                 <td style={{ padding: "10px" }}>
                   <span
                     style={{
-                      padding: "4px 10px",
+                      padding: "5px 12px",
                       borderRadius: "999px",
-                      background: `${status.color}20`,
+                      background: `${status.color}15`,
                       color: status.color,
                       fontSize: "12px",
                       fontWeight: "600",
@@ -112,27 +109,21 @@ const VaccinationTable = ({ vaccinations, onUpdate }) => {
         <input
           placeholder="Vaccine Name"
           value={form.name}
-          onChange={(e) =>
-            setForm({ ...form, name: e.target.value })
-          }
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
           style={inputStyle}
         />
 
         <input
           type="date"
           value={form.dateGiven}
-          onChange={(e) =>
-            setForm({ ...form, dateGiven: e.target.value })
-          }
+          onChange={(e) => setForm({ ...form, dateGiven: e.target.value })}
           style={inputStyle}
         />
 
         <input
           type="date"
           value={form.expiryDate}
-          onChange={(e) =>
-            setForm({ ...form, expiryDate: e.target.value })
-          }
+          onChange={(e) => setForm({ ...form, expiryDate: e.target.value })}
           style={inputStyle}
         />
 
@@ -146,19 +137,19 @@ const VaccinationTable = ({ vaccinations, onUpdate }) => {
 
 const inputStyle = {
   padding: "10px",
-  borderRadius: "8px",
-  border: "1px solid #334155",
-  background: "#0f172a",
-  color: "white",
+  borderRadius: "10px",
+  border: "1px solid #e2e8f0",
+  background: "#f8fafc",
+  color: "#1e293b",
   outline: "none",
 };
 
 const buttonStyle = {
   padding: "10px 16px",
-  borderRadius: "8px",
+  borderRadius: "10px",
   border: "none",
-  background: "#38bdf8",
-  color: "#0f172a",
+  background: "#facc15",
+  color: "#1e293b",
   fontWeight: "600",
   cursor: "pointer",
 };
