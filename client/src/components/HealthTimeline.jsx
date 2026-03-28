@@ -156,14 +156,15 @@ const formContainer = {
   display: "flex",
   gap: "10px",
   flexWrap: "wrap",
+  justifyContent:"center "
 };
 
 const input = {
   padding: "10px",
   borderRadius: "10px",
   border: "1px solid #e2e8f0",
-  background: "#f8fafc",
-  color: "#1e293b",
+  background: "#a3a2a2",
+  color: "#000000",
   outline: "none",
 };
 

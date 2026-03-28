@@ -104,6 +104,7 @@ const VaccinationTable = ({ vaccinations, onUpdate }) => {
           display: "flex",
           gap: "10px",
           flexWrap: "wrap",
+          justifyContent:"center "
         }}
       >
         <input
@@ -139,9 +140,10 @@ const inputStyle = {
   padding: "10px",
   borderRadius: "10px",
   border: "1px solid #e2e8f0",
-  background: "#f8fafc",
+  background: "#a3a2a2",
   color: "#1e293b",
   outline: "none",
+  cursor: "pointer",
 };
 
 const buttonStyle = {
