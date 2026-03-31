@@ -7,11 +7,24 @@ const VaccinationTable = ({ vaccinations, onUpdate }) => {
     expiryDate: "",
   });
 
+  const [error, setError] = useState("");
+
   const handleAdd = () => {
     if (!form.name || !form.dateGiven || !form.expiryDate) {
-      alert("Please fill all fields");
+      setError("Please fill all fields");
       return;
     }
+
+    const given = new Date(form.dateGiven);
+    const expiry = new Date(form.expiryDate);
+
+    // 🔥 Validation
+    if (expiry < given) {
+      setError("Expiry date cannot be before date given");
+      return;
+    }
+
+    setError("");
 
     onUpdate({
       vaccinations: [...vaccinations, form],
@@ -63,12 +76,7 @@ const VaccinationTable = ({ vaccinations, onUpdate }) => {
             const status = getStatus(v.expiryDate);
 
             return (
-              <tr
-                key={i}
-                style={{
-                  borderTop: "1px solid #e2e8f0",
-                }}
-              >
+              <tr key={i} style={{ borderTop: "1px solid #e2e8f0" }}>
                 <td style={{ padding: "10px" }}>{v.name}</td>
                 <td style={{ padding: "10px" }}>
                   {new Date(v.dateGiven).toDateString()}
@@ -104,7 +112,7 @@ const VaccinationTable = ({ vaccinations, onUpdate }) => {
           display: "flex",
           gap: "10px",
           flexWrap: "wrap",
-          justifyContent:"center "
+          justifyContent: "center",
         }}
       >
         <input
@@ -132,6 +140,20 @@ const VaccinationTable = ({ vaccinations, onUpdate }) => {
           Add
         </button>
       </div>
+
+      {/* 🔥 Inline Error */}
+      {error && (
+        <p
+          style={{
+            color: "#ef4444",
+            marginTop: "10px",
+            fontSize: "14px",
+            textAlign: "center",
+          }}
+        >
+          {error}
+        </p>
+      )}
     </div>
   );
 };
@@ -143,7 +165,6 @@ const inputStyle = {
   background: "#a3a2a2",
   color: "#1e293b",
   outline: "none",
-  cursor: "pointer",
 };
 
 const buttonStyle = {

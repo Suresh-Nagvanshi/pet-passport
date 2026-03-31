@@ -7,11 +7,27 @@ const HealthTimeline = ({ events = [], onUpdate }) => {
     description: "",
   });
 
+  const [error, setError] = useState("");
+
   const handleAdd = () => {
     if (!form.date || !form.description) {
-      alert("Please fill all fields");
+      setError("Please fill all fields");
       return;
     }
+
+    const selectedDate = new Date(form.date);
+    const today = new Date();
+
+    // 🔥 Remove time part for accurate comparison
+    today.setHours(0, 0, 0, 0);
+
+    // 🔥 Validation: future date not allowed
+    if (selectedDate > today) {
+      setError("Date cannot be in the future");
+      return;
+    }
+
+    setError("");
 
     onUpdate({
       healthEvents: [...events, form],
@@ -30,22 +46,17 @@ const HealthTimeline = ({ events = [], onUpdate }) => {
 
       {/* Timeline */}
       <div style={{ position: "relative" }}>
-        {/* Vertical Line */}
         <div style={line} />
 
         {events.map((e, i) => (
           <div key={i} style={row}>
-            {/* DOT */}
             <div style={dotWrapper}>
               <div style={dot} />
             </div>
 
-            {/* CONTENT */}
             <div style={content}>
               <div style={date}>{new Date(e.date).toDateString()}</div>
-
               <div style={type}>{e.type.toUpperCase()}</div>
-
               <div style={desc}>{e.description}</div>
             </div>
           </div>
@@ -74,7 +85,9 @@ const HealthTimeline = ({ events = [], onUpdate }) => {
         <input
           placeholder="Description"
           value={form.description}
-          onChange={(e) => setForm({ ...form, description: e.target.value })}
+          onChange={(e) =>
+            setForm({ ...form, description: e.target.value })
+          }
           style={input}
         />
 
@@ -82,11 +95,25 @@ const HealthTimeline = ({ events = [], onUpdate }) => {
           Add
         </button>
       </div>
+
+      {/* 🔥 Inline Error */}
+      {error && (
+        <p
+          style={{
+            color: "#ef4444",
+            marginTop: "10px",
+            fontSize: "14px",
+            textAlign: "center",
+          }}
+        >
+          {error}
+        </p>
+      )}
     </div>
   );
 };
 
-/*  STYLES */
+/* STYLES */
 
 const card = {
   marginTop: "20px",
@@ -156,7 +183,7 @@ const formContainer = {
   display: "flex",
   gap: "10px",
   flexWrap: "wrap",
-  justifyContent:"center "
+  justifyContent: "center",
 };
 
 const input = {
